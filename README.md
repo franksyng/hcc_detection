@@ -1,6 +1,8 @@
 # HCC_Detection
+MSc project: Detecting Oncogenic Mutations and Morphological Changes in Histology Images of Early Cancer via Deep Learning by ©Frank S.Y. Ng
 
----
+Contact info: franksyng@gmail.com
+
 
 ## Environment Setup
 1. Recommend running with python 3.9.
