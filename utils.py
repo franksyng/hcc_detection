@@ -40,9 +40,7 @@ def pred_to_text(pred):
     :param model_output: a tensor output by the model
     :return: GOF, LOF and onset time classification result in text
     """
-    # probs = model_output.tolist()[0]
-    # print(probs)
-    # pred = [round(prob) for prob in probs]
+
     if pred[0] == 1:
         gof = 'Kras'
     elif pred[1] == 1:
@@ -114,19 +112,19 @@ def get_saliency_map(model, target_layers, cls_target, img_path, cam_type: str =
 
     img = load_img(img_path, grayscale, True)
 
-    model_output = model(img)
-    targets = [ClassifierOutputTarget(cls_target)]
+    pred_gene, pred_time = model(img)
+    targets = [ClassifierOutputTarget(cls_target)]  # Kras: 0, Bcat: 1, 7d: 3, 21d: 4, 9w: 5 (i.e., the index in label)
     grayscale_cam = cam(input_tensor=img, targets=targets)
     original_img = cv2.imread(img_path)
     original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB).astype(np.float32)/255.0
-
     grayscale_cam = np.transpose(grayscale_cam, (1, 2, 0))
 
     # for the reason mentioned at the beginning of this function,
     # if the function is unable to run, comment the line of code below and use the next line
     heatmap_with_img, heatmap = show_cam_on_image(original_img, grayscale_cam, use_rgb=True, colormap=cv2.COLORMAP_INFERNO)
     # heatmap_with_img = show_cam_on_image(original_img, grayscale_cam, use_rgb=True)
-    res = pred_to_text(model_output)
+    pred = res_in_binary(torch.softmax(pred_gene, dim=1))[0] + res_in_binary(torch.softmax(pred_time, dim=1))[0]
+    res = pred_to_text(pred)
     return heatmap, heatmap_with_img, res
 
 

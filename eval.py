@@ -15,7 +15,7 @@ print('Using', device)
 
 
 def get_args():
-    parser = argparse.ArgumentParser('train')
+    parser = argparse.ArgumentParser('eval')
 
     parser.add_argument('--arch', default='ResNet50', help='Specify one model architecture')
     parser.add_argument('--ckpt', default='ckpt/ResNet50/best.pth', help='Choose checkpoint file')
@@ -34,7 +34,6 @@ def evaluation(args):
     ckpt_path = args.ckpt
     testset = args.testset
     gt = args.gt
-    cls_target = args.cls_target
     cam_type = args.saliency
     grayscale = args.grayscale
     eval_as_fold = args.eval_as_fold
@@ -80,6 +79,7 @@ def evaluation(args):
         img_path = os.path.join(testset, img)
 
         if cam_type is not None:
+            cls_target = args.cls_target
             test_info = testset.split('/')[-1].split('_')
             mouse_id = test_info[0]
             gof = test_info[1]

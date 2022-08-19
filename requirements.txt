@@ -1,0 +1,7 @@
+torchvision==0.14.0.dev20220713
+tqdm==4.64.0
+pillow==9.2.0
+opencv-python==4.5.5.64
+numpy==1.23.1
+pandas==1.4.3
+grad-cam==1.4.0
