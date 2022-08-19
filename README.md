@@ -8,7 +8,7 @@ Contact info: franksyng@gmail.com
 1. Recommend running with python 3.9.
 2. Run ```pip install -r requirements.txt``` to install packages.
 3. IMPORTANT: Since the output of grad-cam package adds heatmap and original image together by default, either of the following steps should be done or the project will not able to be run. 
-   - If not remanding a pure heatmap, please comment the code in line 124 of ```utils.py``` replace it with the code in line 125. 
+   - If not demanding a pure heatmap, please comment the code in line 124 of ```utils.py``` replace it with the code in line 125. 
    - If want to obtain pure heatmap, please replace the function ```show_cam_on_image``` with the following codes. (hints: to find ```show_cam_on_image``` please refer to ```utils.get_saliency``` line 124 and use ```cmd + left click``` to find the usage in package.) 
 ```
 def show_cam_on_image(img: np.ndarray,
